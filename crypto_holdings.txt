@@ -1,0 +1,12 @@
+Crypto: Bitcoin
+Amount: 1.5
+Purchase Price: $50000
+Current Price: $36444.0
+Net PnL: $-20334.0
+=====================
+Crypto: Ethereum
+Amount: 0.0113886
+Purchase Price: $1790
+Current Price: $1985.77
+Net PnL: $2.2295462219999997
+=====================
