@@ -1,5 +1,7 @@
 import requests
-
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
 
 base_url = 'https://api.coingecko.com/api/v3'
 
@@ -25,17 +27,33 @@ def calculate_profit_loss(amount, purchase_price, current_price):
     pnl = current_value - invested_amount
     return pnl
 
-with open('crypto_holdings.txt', 'w') as file:
-    for crypto, details in crypto_holdings.items():
-        price = get_crypto_price(crypto.lower())
-        if price:
-            current_price = float(price)
-            pnl = calculate_profit_loss(details['amount'], details['purchase_price'], current_price)
-            file.write(f"Crypto: {crypto}\n")
-            file.write(f"Amount: {details['amount']}\n")
-            file.write(f"Purchase Price: ${details['purchase_price']}\n")
-            file.write(f"Current Price: ${current_price}\n")
-            file.write(f"Net PnL: ${pnl}\n")
-            file.write("=====================\n")
+st.title('Crypto Holdings PNL Dashboard')
 
-print("Data written to crypto_holdings.txt")
+pnl_data = {'Crypto': [], 'PNL': []}
+
+for crypto, details in crypto_holdings.items():
+    price = get_crypto_price(crypto.lower())
+    if price:
+        current_price = float(price)
+        pnl = calculate_profit_loss(details['amount'], details['purchase_price'], current_price)
+        pnl_data['Crypto'].append(crypto)
+        pnl_data['PNL'].append(pnl)
+        st.write(f"### {crypto}")
+        st.write(f"Amount: {details['amount']}")
+        st.write(f"Purchase Price: ${details['purchase_price']}")
+        st.write(f"Current Price: ${current_price}")
+        st.write(f"Net PnL: ${pnl}")
+        st.write("---")
+
+# Dummy historical PNL data (Replace this with actual historical data)
+historical_data = {
+    'Date': pd.date_range('2023-01-01', periods=10),
+    'Bitcoin': [100, 120, 150, 130, 140, 160, 180, 170, 190, 200],
+    'Ethereum': [50, 60, 70, 80, 90, 100, 110, 120, 130, 140]
+}
+
+df = pd.DataFrame(historical_data)
+df = df.set_index('Date')
+
+st.write("## Historical PNL Trends")
+st.line_chart(df)
