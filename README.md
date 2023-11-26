@@ -6,7 +6,7 @@ This Python script calculates the profit or loss of a cryptocurrency portfolio b
 
 Before using this script, ensure you have the following installed:
 
-- Python 3.x
+- Python 3.9
 - `requests` library (`pip install requests`)
 
 ## Setup
