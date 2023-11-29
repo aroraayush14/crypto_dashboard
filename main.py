@@ -7,6 +7,8 @@ base_url = 'https://api.coingecko.com/api/v3'
 crypto_holdings = {
     'Bitcoin': {'amount': 1.5, 'purchase_price': 50000},
     'Ethereum': {'amount': 0.0113886, 'purchase_price': 1790},
+    'Solana': {'amount':0.29, 'purchase_price':58.26}
+    
     # Add more cryptocurrencies and their amounts here
 }
 
